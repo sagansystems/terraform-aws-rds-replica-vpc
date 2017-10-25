@@ -4,7 +4,8 @@ locals {
 }
 
 resource "aws_vpc" "replica" {
-  count = "${var.enabled ? 1 : 0}"
+  count    = "${var.enabled ? 1 : 0}"
+  provider = "aws.replica"
 
   cidr_block = "${var.cidr}"
 
@@ -12,7 +13,8 @@ resource "aws_vpc" "replica" {
 }
 
 resource "aws_subnet" "replica" {
-  count = "${var.enabled ? 1 : 0}"
+  count    = "${var.enabled ? 1 : 0}"
+  provider = "aws.replica"
 
   vpc_id            = "${aws_vpc.replica.id}"
   cidr_block        = "${var.subnet}"
@@ -22,7 +24,8 @@ resource "aws_subnet" "replica" {
 }
 
 resource "aws_db_subnet_group" "replica" {
-  count = "${var.enabled ? 1 : 0}"
+  count    = "${var.enabled ? 1 : 0}"
+  provider = "aws.replica"
 
   name        = "${local.name}"
   description = "Database subnet group for ${local.name}"
