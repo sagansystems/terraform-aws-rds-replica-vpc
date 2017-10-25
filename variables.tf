@@ -1,3 +1,6 @@
+variable "provider" {
+}
+
 variable "region" {
   description = "Region to create the Replica in"
 }

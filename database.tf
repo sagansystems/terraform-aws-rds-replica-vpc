@@ -1,10 +1,6 @@
-provider "aws" {
-  region = "${var.region}"
-  alias  = "replica"
-}
 
 data "aws_availability_zones" "available" {
-  provider = "aws.replica"
+  provider = "${var.provider}"
   state    = "available"
 }
 
