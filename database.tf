@@ -5,7 +5,7 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 module "vpc" {
-  source   = "git::git@github.com:terraform-aws-modules.git//terraform-aws-vpc?ref=tags/1.0.4"
+  source   = "git@github.com:terraform-aws-modules/terraform-aws-vpc.git?ref=tags/1.0.4"
   provider = "aws.replica"
 
   name = "${var.namespace}-replica"
