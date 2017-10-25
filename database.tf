@@ -2,11 +2,13 @@ provider "aws" {
   region = "${var.region}"
 }
 
-data "aws_availability_zones" "available" {}
+data "aws_availability_zones" "available" {
+    provider = "aws.replica"
+    state = "available"
+}
 
 module "vpc" {
   source   = "git@github.com:terraform-aws-modules/terraform-aws-vpc.git?ref=tags/v1.0.4"
-  provider = "aws.replica"
 
   name = "${var.namespace}-replica"
   cidr = "${var.cidr}"
