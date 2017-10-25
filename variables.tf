@@ -1,4 +1,4 @@
-variable "provider" {
+variable "provider_alias" {
 }
 
 variable "region" {

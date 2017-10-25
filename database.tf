@@ -1,6 +1,6 @@
 
 data "aws_availability_zones" "available" {
-  provider = "${var.provider}"
+  provider = "${var.provider_alias}"
   state    = "available"
 }
 
