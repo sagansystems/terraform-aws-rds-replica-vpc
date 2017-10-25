@@ -9,7 +9,7 @@ provider "aws" {
 }
 
 data "aws_availability_zones" "available" {
-  provider = "replica"
+  provider = "aws.replica"
   state    = "available"
 }
 
