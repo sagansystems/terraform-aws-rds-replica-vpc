@@ -15,8 +15,8 @@ module "vpc" {
   cidr = "${var.cidr}"
 
   create_database_subnet_group = true
-  database_subnets             = "[${var.subnet}]"
-  azs                          = "[${data.aws_availability_zones.available.names[0]}]"
+  database_subnets             = ["${var.subnet}"]
+  azs                          = ["${data.aws_availability_zones.available.names[0]}"]
 
   tags = "${var.tags}"
 }
