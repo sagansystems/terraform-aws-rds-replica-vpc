@@ -1,0 +1,43 @@
+provider "aws" {
+  region = "${var.region}"
+}
+
+data "aws_availability_zones" "available" {}
+
+module "vpc" {
+  source   = "git::git@github.com:terraform-aws-modules.git//terraform-aws-vpc?ref=tags/1.0.4"
+  provider = "aws.replica"
+
+  name = "${var.namespace}-replica"
+  cidr = "${var.cidr}"
+
+  create_database_subnet_group = true
+  database_subnets             = "[${var.subnet}]"
+  azs                          = "[${data.aws_availability_zones.available.names[0]}]"
+
+  tags = "${var.tags}"
+}
+
+# resource "aws_db_instance" "replica" {
+#   replicate_source_db         = "${var.replicate_source_db}"       
+#   instance_class              = "${var.db_instance_class}"         
+#   publicly_accessible         = false                              
+#   auto_minor_version_upgrade  = true                               
+#   allow_major_version_upgrade = true                               
+#   db_subnet_group_name        = "${aws_db_subnet_group.default.id}"
+
+
+#   storage_type      = "${var.db_instance_storage_type}"            
+#   iops              = "${var.db_instance_storage_iops}"            
+#   storage_encrypted = true                                         
+
+
+#   port = 5432                                                                                      
+
+
+#   vpc_security_group_ids = ["${aws_security_group.default.id}"]    
+
+
+#   tags = "${var.tags}"
+# }  
+
