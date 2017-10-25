@@ -16,8 +16,3 @@ data "aws_availability_zones" "available" {
   provider = "aws.replica"
   state    = "available"
 }
-
-locals {
-  name              = "${var.namespace}-replica"
-  availability_zone = "${data.aws_availability_zones.available.names[0]}"
-}

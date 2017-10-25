@@ -1,3 +1,8 @@
+locals {
+  name              = "${var.namespace}-replica"
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
+}
+
 resource "aws_vpc" "replica" {
   count = "${var.enabled ? 1 : 0}"
 
