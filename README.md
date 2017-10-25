@@ -1,6 +1,6 @@
 # terraform-aws-rds-replica
 
-Terraform module to provision an AWS [`RDS`](https://aws.amazon.com/rds/) cross-region replica
+Terraform module to provision an AWS [`RDS`](https://aws.amazon.com/rds/) cross-region replica in its own VPC
 
 The module will create:
 * VPC
