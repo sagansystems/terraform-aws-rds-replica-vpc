@@ -26,26 +26,21 @@ module "vpc" {
   tags = "${var.tags}"
 }
 
-# resource "aws_db_instance" "replica" {
-#   replicate_source_db         = "${var.replicate_source_db}"       
-#   instance_class              = "${var.db_instance_class}"         
-#   publicly_accessible         = false                              
-#   auto_minor_version_upgrade  = true                               
-#   allow_major_version_upgrade = true                               
-#   db_subnet_group_name        = "${aws_db_subnet_group.default.id}"
+resource "aws_db_instance" "replica" {
+  replicate_source_db = "${var.source_db_identifier}"
+  instance_class      = "${var.instance_class}"
 
+  db_subnet_group_name   = "${module.vpc.database_subnet_group}"
+  vpc_security_group_ids = ["${module.vpc.vpc_id}"]
 
-#   storage_type      = "${var.db_instance_storage_type}"            
-#   iops              = "${var.db_instance_storage_iops}"            
-#   storage_encrypted = true                                         
+  storage_type = "${var.storage_type}"
+  iops         = "${var.storage_iops}"
 
+  port                        = 5432
+  storage_encrypted           = true
+  publicly_accessible         = false
+  auto_minor_version_upgrade  = true
+  allow_major_version_upgrade = true
 
-#   port = 5432                                                                                      
-
-
-#   vpc_security_group_ids = ["${aws_security_group.default.id}"]    
-
-
-#   tags = "${var.tags}"
-# }  
-
+  tags = "${var.tags}"
+}
