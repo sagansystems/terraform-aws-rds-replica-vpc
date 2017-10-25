@@ -1,8 +1,14 @@
-variable "provider_alias" {
-}
 
 variable "region" {
   description = "Region to create the Replica in"
+}
+
+variable "aws_assume_role_profile" {
+
+}
+
+variable "aws_assume_role_arn" {
+
 }
 
 variable "namespace" {

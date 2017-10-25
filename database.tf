@@ -1,4 +1,14 @@
 
+provider "aws" {
+  region  = "${var.region}"
+  alias   = "replica"
+  profile = "${var.aws_assume_role_profile}"
+
+  assume_role {
+    role_arn = "${var.aws_assume_role_arn}"
+  }
+}
+
 data "aws_availability_zones" "available" {
   provider = "${var.provider_alias}"
   state    = "available"
