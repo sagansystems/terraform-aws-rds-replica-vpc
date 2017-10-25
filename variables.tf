@@ -39,12 +39,12 @@ variable "storage_iops" {
 
 variable "cidr" {
   description = "CIDR Block for the VPC"
-  default     = "10.21.0.0/16"
+  default     = "10.22.0.0/16"
 }
 
 variable "subnet" {
   description = "Subnet to create for the instance"
-  default     = "10.21.1.0/24"
+  default     = "10.22.1.0/24"
 }
 
 variable "tags" {
