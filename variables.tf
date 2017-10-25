@@ -1,3 +1,8 @@
+variable "enabled" {
+  description = "If true a replica is created"
+  default     = false
+}
+
 variable "region" {
   description = "Region to create the Replica in"
 }
