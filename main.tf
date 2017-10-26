@@ -3,10 +3,10 @@ terraform {
 }
 
 provider "aws" {
-  region  = "${var.region}"
   alias   = "replica"
-  profile = "${var.aws_assume_role_profile}"
+  region  = "${var.region}"
 
+  profile = "${var.aws_assume_role_profile}"
   assume_role {
     role_arn = "${var.aws_assume_role_arn}"
   }
