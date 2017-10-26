@@ -16,7 +16,7 @@ resource "aws_subnet" "replica" {
   provider = "aws.replica"
 
   vpc_id            = "${aws_vpc.replica.id}"
-  cidr_block        = "${element(subnets, count.index)}"
+  cidr_block        = "${element(var.subnets, count.index)}"
   availability_zone = "${element(data.aws_availability_zones.available.names, count.index)}"
 
   tags = "${merge(var.tags, map("Name", format("%s", local.name)))}"
