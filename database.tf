@@ -1,3 +1,5 @@
+
+# Use of local for identifier causes recreation?
 resource "aws_db_instance" "replica" {
   count    = "${var.enabled ? 1 : 0}"
   provider = "aws.replica"
@@ -12,7 +14,8 @@ resource "aws_db_instance" "replica" {
   iops         = "${var.storage_iops}"
 
   port                        = 5432
-  kms_key_id                  = "${data.aws_kms_alias.rds.target_key_id}"
+  # Alias causes a recreation on subsequent apply
+  kms_key_id                  = "${data.aws_kms_alias.rds.arn}"
   storage_encrypted           = true
   publicly_accessible         = false
   auto_minor_version_upgrade  = true
