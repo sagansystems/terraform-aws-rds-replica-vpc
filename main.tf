@@ -20,5 +20,6 @@ data "aws_availability_zones" "available" {
 
 # Find the default KMS key for RDS
 data "aws_kms_alias" "rds" {
+  provider = "aws.replica"
   name = "alias/aws/rds"
 }
