@@ -1,5 +1,5 @@
 locals {
-  name              = "${var.namespace}-replica"
+  name = "${var.namespace}-replica"
 }
 
 resource "aws_vpc" "replica" {

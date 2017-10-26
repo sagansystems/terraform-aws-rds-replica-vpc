@@ -3,10 +3,11 @@ terraform {
 }
 
 provider "aws" {
-  alias   = "replica"
-  region  = "${var.region}"
+  alias  = "replica"
+  region = "${var.region}"
 
   profile = "${var.aws_assume_role_profile}"
+
   assume_role {
     role_arn = "${var.aws_assume_role_arn}"
   }
@@ -15,4 +16,9 @@ provider "aws" {
 data "aws_availability_zones" "available" {
   provider = "aws.replica"
   state    = "available"
+}
+
+# Find the default KMS key for RDS
+data "aws_kms_alias" "rds" {
+  name = "alias/aws/rds"
 }
