@@ -2,6 +2,7 @@ resource "aws_db_instance" "replica" {
   count    = "${var.enabled ? 1 : 0}"
   provider = "aws.replica"
 
+  identifier          = "${local.name}"
   replicate_source_db = "${var.source_db_identifier}"
   instance_class      = "${var.instance_class}"
 
