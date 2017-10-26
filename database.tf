@@ -12,7 +12,7 @@ resource "aws_db_instance" "replica" {
   iops         = "${var.storage_iops}"
 
   port                        = 5432
-  kms_key_id                  = "${data.aws_kms_alias.rds.arn}"
+  kms_key_id                  = "${data.aws_kms_alias.rds.target_key_id}"
   storage_encrypted           = true
   publicly_accessible         = false
   auto_minor_version_upgrade  = true
