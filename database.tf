@@ -8,6 +8,9 @@ module "kms_label" {
 }
 
 resource "aws_kms_key" "repica" {
+  count    = "${var.enabled ? 1 : 0}"
+  provider = "aws.replica"
+
   description             = "${module.kms_label.id} key"
   deletion_window_in_days = 10
   enable_key_rotation     = true
