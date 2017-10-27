@@ -19,6 +19,10 @@ variable "namespace" {
   description = "Namespace for the resources. ex: production1"
 }
 
+variable "stage" {
+  description = "Stage of the replica (prod/staging/dev)"
+}
+
 variable "source_db_identifier" {
   description = "Identifier of another Amazon RDS Database to replicate"
 }
