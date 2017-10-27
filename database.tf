@@ -14,7 +14,7 @@ resource "aws_kms_key" "repica" {
   description             = "${module.kms_label.id} key"
   deletion_window_in_days = 10
   enable_key_rotation     = true
-  tags = "${module.kms_label.tags}"
+  tags                    = "${module.kms_label.tags}"
 }
 
 module "rds_label" {
@@ -45,6 +45,7 @@ resource "aws_db_instance" "replica" {
   publicly_accessible         = false
   auto_minor_version_upgrade  = true
   allow_major_version_upgrade = true
+  skip_final_snapshot         = true
 
   tags = "${module.rds_label.tags}"
 }
