@@ -1,5 +1,5 @@
 variable "enabled" {
-  description = "If true a replica is created"
+  description = "Set to true to enable the module"
   default     = false
 }
 
