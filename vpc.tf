@@ -19,13 +19,13 @@ resource "aws_vpc" "replica" {
 
 locals {
   zone_1_az                 = "${element(data.aws_availability_zones.available.names, 0)}"
-  zone_1_private_cidr_block = "${cidrsubnet(module.vpc.vpc_cidr_block, 2, 0)}"
+  zone_1_private_cidr_block = "${cidrsubnet(aws_vpc.replica.cidr_block, 2, 0)}"
 
   zone_2_az                 = "${element(data.aws_availability_zones.available.names, 1)}"
-  zone_2_private_cidr_block = "${cidrsubnet(module.vpc.vpc_cidr_block, 2, 1)}"
+  zone_2_private_cidr_block = "${cidrsubnet(aws_vpc.replica.cidr_block, 2, 1)}"
 
   zone_3_az                 = "${element(data.aws_availability_zones.available.names, 2)}"
-  zone_3_private_cidr_block = "${cidrsubnet(module.vpc.vpc_cidr_block, 2, 2)}"
+  zone_3_private_cidr_block = "${cidrsubnet(aws_vpc.replica.cidr_block, 2, 2)}"
 }
 
 module "zone_1_label" {
