@@ -40,7 +40,7 @@ module "zone_1_label" {
 
 resource "aws_subnet" "zone_1" {
   count             = "${var.enabled == "true" ? 1 : 0}"
-  provider = "aws.replica"
+  provider          = "aws.replica"
   vpc_id            = "${aws_vpc.replica.id}"
   availability_zone = "${local.zone_1_az}"
   cidr_block        = "${local.zone_1_private_cidr_block}"
@@ -60,7 +60,7 @@ module "zone_2_label" {
 
 resource "aws_subnet" "zone_2" {
   count             = "${var.enabled == "true" ? 1 : 0}"
-  provider = "aws.replica"
+  provider          = "aws.replica"
   vpc_id            = "${aws_vpc.replica.id}"
   availability_zone = "${local.zone_2_az}"
   cidr_block        = "${local.zone_2_private_cidr_block}"
@@ -80,7 +80,7 @@ module "zone_3_label" {
 
 resource "aws_subnet" "zone_3" {
   count             = "${var.enabled == "true" ? 1 : 0}"
-  provider = "aws.replica"
+  provider          = "aws.replica"
   vpc_id            = "${aws_vpc.replica.id}"
   availability_zone = "${local.zone_3_az}"
   cidr_block        = "${local.zone_3_private_cidr_block}"
