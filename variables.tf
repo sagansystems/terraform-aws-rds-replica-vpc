@@ -46,11 +46,6 @@ variable "cidr" {
   default     = "10.22.0.0/16"
 }
 
-variable "subnets" {
-  description = "Subnet to create for the instance"
-  default     = ["10.22.1.0/24", "10.22.2.0/24", "10.22.3.0/24"]
-}
-
 variable "tags" {
   description = "Tags to assign to the resources"
   default     = {}

@@ -1,4 +1,5 @@
 module "vpc_label" {
+  enabled    = "${var.enabled}"
   source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.2.2"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
@@ -8,7 +9,7 @@ module "vpc_label" {
 }
 
 resource "aws_vpc" "replica" {
-  count    = "${var.enabled ? 1 : 0}"
+  count    = "${var.enabled == "true" ? 1 : 0}"
   provider = "aws.replica"
 
   cidr_block = "${var.cidr}"
@@ -16,28 +17,76 @@ resource "aws_vpc" "replica" {
   tags = "${module.vpc_label.tags}"
 }
 
-module "subnet_label" {
+locals {
+  zone_1_az                 = "${element(data.aws_availability_zones.available.names, 0)}"
+  zone_1_private_cidr_block = "${cidrsubnet(module.vpc.vpc_cidr_block, 2, 0)}"
+
+  zone_2_az                 = "${element(data.aws_availability_zones.available.names, 1)}"
+  zone_2_private_cidr_block = "${cidrsubnet(module.vpc.vpc_cidr_block, 2, 1)}"
+
+  zone_3_az                 = "${element(data.aws_availability_zones.available.names, 2)}"
+  zone_3_private_cidr_block = "${cidrsubnet(module.vpc.vpc_cidr_block, 2, 2)}"
+}
+
+module "zone_1_label" {
+  enabled    = "${var.enabled}"
   source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.2.2"
   namespace  = "${var.namespace}"
+  name       = "${local.zone_1_az}"
+  attributes = ["private"]
   stage      = "${var.stage}"
-  name       = "subnet"
-  attributes = ["replica"]
   tags       = "${var.tags}"
 }
 
-resource "aws_subnet" "replica" {
-  count    = "${var.enabled ? length(var.subnets) : 0}"
-  provider = "aws.replica"
+resource "aws_subnet" "zone_1" {
+  count             = "${var.enabled == "true" ? 1 : 0}"
+  vpc_id            = "${var.vpc_id}"
+  availability_zone = "${local.zone_1_az}"
+  cidr_block        = "${local.zone_1_private_cidr_block}"
 
-  vpc_id                  = "${aws_vpc.replica.id}"
-  cidr_block              = "${element(var.subnets, count.index)}"
-  availability_zone       = "${element(data.aws_availability_zones.available.names, count.index)}"
-  map_public_ip_on_launch = false
+  tags = "${module.zone_1_label.tags}"
+}
 
-  tags = "${module.db_subnet_label.tags}"
+module "zone_2_label" {
+  enabled    = "${var.enabled}"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.2.2"
+  namespace  = "${var.namespace}"
+  name       = "${local.zone_2_az}"
+  attributes = ["private"]
+  stage      = "${var.stage}"
+  tags       = "${var.tags}"
+}
+
+resource "aws_subnet" "zone_2" {
+  count             = "${var.enabled == "true" ? 1 : 0}"
+  vpc_id            = "${var.vpc_id}"
+  availability_zone = "${local.zone_2_az}"
+  cidr_block        = "${local.zone_2_private_cidr_block}"
+
+  tags = "${module.zone_2_label.tags}"
+}
+
+module "zone_3_label" {
+  enabled    = "${var.enabled}"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.2.2"
+  namespace  = "${var.namespace}"
+  name       = "${local.zone_3_az}"
+  attributes = ["private"]
+  stage      = "${var.stage}"
+  tags       = "${var.tags}"
+}
+
+resource "aws_subnet" "zone_3" {
+  count             = "${var.enabled == "true" ? 1 : 0}"
+  vpc_id            = "${var.vpc_id}"
+  availability_zone = "${local.zone_3_az}"
+  cidr_block        = "${local.zone_3_private_cidr_block}"
+
+  tags = "${module.zone_3_label.tags}"
 }
 
 module "db_subnet_label" {
+  enabled    = "${var.enabled}"
   source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.2.2"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
@@ -47,12 +96,12 @@ module "db_subnet_label" {
 }
 
 resource "aws_db_subnet_group" "replica" {
-  count    = "${var.enabled ? 1 : 0}"
+  count    = "${var.enabled == "true" ? 1 : 0}"
   provider = "aws.replica"
 
   name        = "${module.db_subnet_label.id}"
   description = "Database subnet group for ${module.db_subnet_label.name}"
-  subnet_ids  = ["${aws_subnet.replica.*.id}"]
+  subnet_ids  = ["${aws_subnet.zone_1.id}", "${aws_subnet.zone_2.id}", "${aws_subnet.zone_1.id}"]
 
   tags = "${module.db_subnet_label.tags}"
 }
