@@ -1,6 +1,6 @@
 module "kms_label" {
   enabled    = "${var.enabled}"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=add-enable"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.0"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   name       = "kms"
@@ -20,7 +20,7 @@ resource "aws_kms_key" "repica" {
 
 module "rds_label" {
   enabled    = "${var.enabled}"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=add-enable"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.0"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   name       = "rds"
@@ -32,7 +32,7 @@ resource "aws_db_instance" "replica" {
   count    = "${var.enabled ? 1 : 0}"
   provider = "aws.replica"
 
-  identifier          = "${module.rds_label.name}"
+  identifier          = "${module.rds_label.id}"
   replicate_source_db = "${var.source_db_identifier}"
   instance_class      = "${var.instance_class}"
 
