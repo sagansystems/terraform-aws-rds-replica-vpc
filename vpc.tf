@@ -38,7 +38,7 @@ resource "aws_subnet" "zone_1" {
   provider          = "aws.replica"
   vpc_id            = "${aws_vpc.replica.id}"
   availability_zone = "${local.zone_1_az}"
-  cidr_block        = "${local.${cidrsubnet(aws_vpc.replica.cidr_block, 2, 0)}}"
+  cidr_block        = "${cidrsubnet(aws_vpc.replica.cidr_block, 2, 0)}"
 
   tags = "${module.zone_1_label.tags}"
 }
@@ -58,7 +58,7 @@ resource "aws_subnet" "zone_2" {
   provider          = "aws.replica"
   vpc_id            = "${aws_vpc.replica.id}"
   availability_zone = "${local.zone_2_az}"
-  cidr_block        = "${local.${cidrsubnet(aws_vpc.replica.cidr_block, 2, 1)}}"
+  cidr_block        = "${cidrsubnet(aws_vpc.replica.cidr_block, 2, 1)}"
 
   tags = "${module.zone_2_label.tags}"
 }
@@ -78,7 +78,7 @@ resource "aws_subnet" "zone_3" {
   provider          = "aws.replica"
   vpc_id            = "${aws_vpc.replica.id}"
   availability_zone = "${local.zone_3_az}"
-  cidr_block        = "${local.${cidrsubnet(aws_vpc.replica.cidr_block, 2, 2)}}"
+  cidr_block        = "${cidrsubnet(aws_vpc.replica.cidr_block, 2, 2)}"
 
   tags = "${module.zone_3_label.tags}"
 }
