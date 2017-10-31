@@ -1,3 +1,24 @@
+module "db_subnet_label" {
+  enabled    = "${var.enabled}"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.0"
+  namespace  = "${var.namespace}"
+  stage      = "${var.stage}"
+  name       = "db-subnet"
+  attributes = ["replica"]
+  tags       = "${var.tags}"
+}
+
+resource "aws_db_subnet_group" "replica" {
+  count    = "${var.enabled == "true" ? 1 : 0}"
+  provider = "aws.replica"
+
+  name        = "${module.db_subnet_label.id}"
+  description = "Database subnet group for ${module.db_subnet_label.name}"
+  subnet_ids  = ["${aws_subnet.zone_1.id}", "${aws_subnet.zone_2.id}", "${aws_subnet.zone_3.id}"]
+
+  tags = "${module.db_subnet_label.tags}"
+}
+
 module "kms_label" {
   enabled    = "${var.enabled}"
   source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.0"
