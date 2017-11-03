@@ -50,7 +50,8 @@ module "rds_label" {
 }
 
 resource "aws_db_instance" "replica" {
-  count    = "${var.enabled == "true" ? 1 : 0}"
+#  count    = "${var.enabled == "true" ? 1 : 0}"
+  count    = "0"
   provider = "aws.replica"
 
   identifier          = "${module.rds_label.id}"
