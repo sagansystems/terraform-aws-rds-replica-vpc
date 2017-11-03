@@ -1,6 +1,6 @@
 variable "enabled" {
   description = "Set to true to enable the module"
-  default     = "false"
+  default     = "true"
 }
 
 variable "region" {
