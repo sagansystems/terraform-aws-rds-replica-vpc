@@ -9,8 +9,7 @@ module "db_subnet_label" {
 }
 
 resource "aws_db_subnet_group" "replica" {
-# count    = "${var.enabled == "true" ? 1 : 0}"
-  count    = "0"
+  count    = "${var.enabled == "true" ? 1 : 0}"
   provider = "aws.replica"
 
   name        = "${module.db_subnet_label.id}"
@@ -31,8 +30,7 @@ module "kms_label" {
 }
 
 resource "aws_kms_key" "repica" {
-# count    = "${var.enabled == "true" ? 1 : 0}"
-  count    = "0"
+  count    = "${var.enabled == "true" ? 1 : 0}"
   provider = "aws.replica"
 
   description             = "${module.kms_label.id} key"
@@ -52,8 +50,7 @@ module "rds_label" {
 }
 
 resource "aws_db_instance" "replica" {
-#  count    = "${var.enabled == "true" ? 1 : 0}"
-  count    = "0"
+  count    = "${var.enabled == "true" ? 1 : 0}"
   provider = "aws.replica"
 
   identifier          = "${module.rds_label.id}"
