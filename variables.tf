@@ -1,14 +1,10 @@
 variable "enabled" {
   description = "Set to true to enable the module"
-  default     = false
+  default     = "true"
 }
 
 variable "region" {
   description = "Region to create the Replica in"
-}
-
-variable "aws_assume_role_profile" {
-  description = "Profile to use when assuming an AWS role"
 }
 
 variable "aws_assume_role_arn" {
