@@ -1,6 +1,6 @@
 module "db_subnet_label" {
   enabled    = "${var.enabled}"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.1"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.2"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   name       = "db-subnet"
@@ -21,7 +21,7 @@ resource "aws_db_subnet_group" "replica" {
 
 module "kms_label" {
   enabled    = "${var.enabled}"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.1"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.2"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   name       = "kms"
@@ -41,7 +41,7 @@ resource "aws_kms_key" "repica" {
 
 module "rds_label" {
   enabled    = "${var.enabled}"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.1"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.2"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   name       = "rds"
