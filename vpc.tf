@@ -1,6 +1,6 @@
 module "vpc_label" {
   enabled    = "${var.enabled}"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.0"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   name       = "vpc"
@@ -25,7 +25,7 @@ locals {
 
 module "zone_1_label" {
   enabled    = "${var.enabled}"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.0"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
   namespace  = "${var.namespace}"
   name       = "${local.zone_1_az}"
   attributes = ["private"]
@@ -45,7 +45,7 @@ resource "aws_subnet" "zone_1" {
 
 module "zone_2_label" {
   enabled    = "${var.enabled}"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.0"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
   namespace  = "${var.namespace}"
   name       = "${local.zone_2_az}"
   attributes = ["private"]
@@ -65,7 +65,7 @@ resource "aws_subnet" "zone_2" {
 
 module "zone_3_label" {
   enabled    = "${var.enabled}"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.0"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
   namespace  = "${var.namespace}"
   name       = "${local.zone_3_az}"
   attributes = ["private"]
