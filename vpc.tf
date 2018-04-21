@@ -9,8 +9,7 @@ module "vpc_label" {
 }
 
 resource "aws_vpc" "replica" {
-  count    = "${var.enabled == "true" ? 1 : 0}"
-  provider = "aws.replica"
+  count = "${var.enabled == "true" ? 1 : 0}"
 
   cidr_block = "${var.cidr}"
 
@@ -34,8 +33,8 @@ module "zone_1_label" {
 }
 
 resource "aws_subnet" "zone_1" {
-  count             = "${var.enabled == "true" ? 1 : 0}"
-  provider          = "aws.replica"
+  count = "${var.enabled == "true" ? 1 : 0}"
+
   vpc_id            = "${aws_vpc.replica.id}"
   availability_zone = "${local.zone_1_az}"
   cidr_block        = "${cidrsubnet(aws_vpc.replica.cidr_block, 2, 0)}"
@@ -54,8 +53,8 @@ module "zone_2_label" {
 }
 
 resource "aws_subnet" "zone_2" {
-  count             = "${var.enabled == "true" ? 1 : 0}"
-  provider          = "aws.replica"
+  count = "${var.enabled == "true" ? 1 : 0}"
+
   vpc_id            = "${aws_vpc.replica.id}"
   availability_zone = "${local.zone_2_az}"
   cidr_block        = "${cidrsubnet(aws_vpc.replica.cidr_block, 2, 1)}"
@@ -74,8 +73,8 @@ module "zone_3_label" {
 }
 
 resource "aws_subnet" "zone_3" {
-  count             = "${var.enabled == "true" ? 1 : 0}"
-  provider          = "aws.replica"
+  count = "${var.enabled == "true" ? 1 : 0}"
+
   vpc_id            = "${aws_vpc.replica.id}"
   availability_zone = "${local.zone_3_az}"
   cidr_block        = "${cidrsubnet(aws_vpc.replica.cidr_block, 2, 2)}"

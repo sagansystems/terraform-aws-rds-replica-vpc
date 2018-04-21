@@ -3,14 +3,6 @@ variable "enabled" {
   default     = "true"
 }
 
-variable "region" {
-  description = "Region to create the Replica in"
-}
-
-variable "aws_assume_role_arn" {
-  description = "AWS role to assume"
-}
-
 variable "namespace" {
   description = "Namespace for the resources. ex: production1"
 }
