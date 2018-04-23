@@ -1,17 +1,7 @@
 terraform {
-  required_version = ">= 0.10.0"
-}
-
-provider "aws" {
-  alias  = "replica"
-  region = "${var.region}"
-
-  assume_role {
-    role_arn = "${var.aws_assume_role_arn}"
-  }
+  required_version = ">= 0.11.0"
 }
 
 data "aws_availability_zones" "available" {
-  provider = "aws.replica"
-  state    = "available"
+  state = "available"
 }

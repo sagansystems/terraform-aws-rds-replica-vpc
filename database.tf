@@ -9,8 +9,7 @@ module "db_subnet_label" {
 }
 
 resource "aws_db_subnet_group" "replica" {
-  count    = "${var.enabled == "true" ? 1 : 0}"
-  provider = "aws.replica"
+  count = "${var.enabled == "true" ? 1 : 0}"
 
   name        = "${module.db_subnet_label.id}"
   description = "Database subnet group for ${module.db_subnet_label.name}"
@@ -30,8 +29,7 @@ module "kms_label" {
 }
 
 resource "aws_kms_key" "repica" {
-  count    = "${var.enabled == "true" ? 1 : 0}"
-  provider = "aws.replica"
+  count = "${var.enabled == "true" ? 1 : 0}"
 
   description             = "${module.kms_label.id} key"
   deletion_window_in_days = 10
@@ -50,8 +48,7 @@ module "rds_label" {
 }
 
 resource "aws_db_instance" "replica" {
-  count    = "${var.enabled == "true" ? 1 : 0}"
-  provider = "aws.replica"
+  count = "${var.enabled == "true" ? 1 : 0}"
 
   identifier          = "${module.rds_label.id}"
   replicate_source_db = "${var.source_db_identifier}"
