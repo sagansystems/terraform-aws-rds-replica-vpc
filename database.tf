@@ -59,6 +59,8 @@ resource "aws_db_instance" "replica" {
   storage_type = "${var.storage_type}"
   iops         = "${var.storage_iops}"
 
+  monitoring_interval = "${var.monitoring_interval}"
+
   port                        = 5432
   kms_key_id                  = "${aws_kms_key.repica.arn}"
   storage_encrypted           = true

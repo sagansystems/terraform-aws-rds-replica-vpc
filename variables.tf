@@ -29,6 +29,11 @@ variable "storage_iops" {
   default     = 1000
 }
 
+variable "monitoring_interval" {
+  description = "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60"
+  default     = "0"
+}
+
 variable "cidr" {
   description = "CIDR Block for the VPC"
   default     = "10.22.0.0/16"
