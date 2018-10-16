@@ -43,3 +43,8 @@ variable "tags" {
   description = "Tags to assign to the resources"
   default     = {}
 }
+
+variable "monitoring_role_arn" {
+  description = "role to enalbe enhanced monitoring"
+  default     = ""
+}
