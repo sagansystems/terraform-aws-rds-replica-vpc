@@ -60,6 +60,7 @@ resource "aws_db_instance" "replica" {
   iops         = "${var.storage_iops}"
 
   monitoring_interval = "${var.monitoring_interval}"
+  monitoring_role_arn = "${var.monitoring_role_arn}"
 
   port                        = 5432
   kms_key_id                  = "${aws_kms_key.repica.arn}"

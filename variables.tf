@@ -45,6 +45,6 @@ variable "tags" {
 }
 
 variable "monitoring_role_arn" {
-  description = "role to enalbe enhanced monitoring"
+  description = "role to enable enhanced monitoring"
   default     = ""
 }
